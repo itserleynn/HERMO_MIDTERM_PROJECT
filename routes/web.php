@@ -22,6 +22,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/customers', [CustomerController::class, 'store'])->name('customers');
     Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+
+    Route::get('/customers/trash', [CustomerController::class, 'trash'])->name('customers.trash');
+    Route::post('/customers/{id}/restore', [CustomerController::class, 'restore'])->name('customers.restore');
+    Route::delete('/customers/{id}/force-delete', [CustomerController::class, 'forceDelete'])->name('customers.force-delete');
+    Route::get('/customers/export', [CustomerController::class, 'export'])->name('customers.export');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

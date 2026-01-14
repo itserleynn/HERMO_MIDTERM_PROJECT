@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transports', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('capacity');
-            $table->text('description')->nullable();
-            $table->timestamps();
+        Schema::table('customers', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transports');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };
